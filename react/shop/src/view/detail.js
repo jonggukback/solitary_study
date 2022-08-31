@@ -10,16 +10,14 @@ let ColorBtn = styled.button`
 
 function Detail(props) {
 
-    // 컴포넌트가 mount, update 될 때 실행.
+    //컴포넌트가 mount, update 될 때 실행.
     useEffect(()=>{
-        setTimeout(()=>{
-        
-        },2000)
+        if (isNaN(input) == true){
+            alert('그러지마세요')
+        }
     })
 
-
-
-    let [count, setCount] = useState(0);
+    let [input, setInput] = useState('');
 
     let object = props.object;
     let id = useParams().id;
@@ -33,9 +31,8 @@ function Detail(props) {
 
     return (
         <div className="container">
-            <div className='alert alert-warning'>
-                2초이내 구매시 할인
-            </div>
+
+            <input onChange={(e)=>{setInput(e.target.value)}}></input>
             <div className="row">
                 <div className="col-md-6">
                     <img src={result.url} width="100%" />
@@ -44,7 +41,7 @@ function Detail(props) {
                     <h4 className="pt-5">{result.title}</h4>
                     <p>{result.content}</p>
                     <p>{result.price}</p>
-                    <button className="btn btn-danger">주문하기</button>
+                    <button className="btn btn-danger" >주문하기</button>
                 </div>
             </div>
             <ColorBtn bg={'black'}>뒤로가기</ColorBtn>
