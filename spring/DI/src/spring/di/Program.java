@@ -1,5 +1,11 @@
 package spring.di;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import spring.di.entity.Exam;
 import spring.di.entity.NewlecExam;
 import spring.di.ui.ExamConsole;
@@ -11,16 +17,34 @@ public class Program {
 	public static void main(String[] args) {
 		Program main = new Program();
 		//main.Injection();
-		main.SpringInjection();
+		//main.SpringXmlInjection();
+		main.BeanArrayList();
 	}
 	
-	// 스프링이 주입
-	public void SpringInjection() {
+	// 컬렉션을 빈으로 생성해보기
+	public void BeanArrayList() {
+		ApplicationContext context = 
+				new ClassPathXmlApplicationContext("spring/di/setting.xml");
 		
-		Exam exam = new NewlecExam();
-		ExamConsole console = new GridExamConsole();
-		console.setExam(exam);
+		//List<Exam> exams = new ArrayList<>();
+		List<Exam> exams = (List<Exam>) context.getBean("exams");
 		
+		for(Exam e : exams) {
+			System.out.println(e);
+		}
+	}
+	
+	// 스프링이 주입 (.xml) 방법
+	public void SpringXmlInjection() {
+		
+		ApplicationContext context = 
+				new ClassPathXmlApplicationContext("spring/di/setting.xml");
+		
+		Exam exam = context.getBean(Exam.class);
+		System.out.println(exam.toString());
+		
+		//ExamConsole console = (ExamConsole) context.getBean("console");
+		ExamConsole console = context.getBean(ExamConsole.class);
 		console.print();
 	}
 	

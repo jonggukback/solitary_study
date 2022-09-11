@@ -16,8 +16,7 @@ public class GridExamConsole implements ExamConsole {
 	// Setter Injection - 세터 메서드 주입
 	@Override
 	public void setExam(Exam exam) {
-		// TODO Auto-generated method stub
-		
+		this.exam = exam;
 	}
 	
 	@Override
@@ -25,8 +24,7 @@ public class GridExamConsole implements ExamConsole {
 		System.out.println("┌─────────┬─────────┐");
 		System.out.println("│  total  │   avg   │");
 		System.out.println("├─────────┼─────────┤");
-		 System.out.printf("│   %3d   │  %3.2f   │\n",exam.total(),exam.avg());
+		 System.out.printf("│   %3d   │  %3.2f  │\n",exam.total(),exam.avg());
 		System.out.println("└─────────┴─────────┘");
 	}
-
 }
