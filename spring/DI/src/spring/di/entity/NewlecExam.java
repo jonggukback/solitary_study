@@ -1,10 +1,19 @@
 package spring.di.entity;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import org.springframework.beans.factory.annotation.Value;
+
 public class NewlecExam implements Exam {
 
+
 	private int kor;
+
 	private int eng;
+
 	private int math;
+
 	private int com;
 	
 	public NewlecExam() {
@@ -51,7 +60,22 @@ public class NewlecExam implements Exam {
 
 	@Override
 	public int total() {
+		
+		/* Cross-cutting Concern */
+		long start = System.currentTimeMillis();
+		SimpleDateFormat dayTime = new SimpleDateFormat("YYYY-MM-DD HH:MM:SS");
+		String str = dayTime.format(new Date(start));
+		System.out.println(str);
+		/* Cross-cutting Concern */
+		
 		int result = kor+eng+math+com;
+		
+		/* Cross-cutting Concern */
+		long end = System.currentTimeMillis();
+		String message = (end-start)+"ms가 걸림";
+		System.out.println(message);
+		/* Cross-cutting Concern */
+		
 		return result;
 	}
 

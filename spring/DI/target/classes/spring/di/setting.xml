@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:p="http://www.springframework.org/schema/p"
-	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 	
+	<!-- 어노테이션을 사용하기 위한 context 키워드 설정 -->
+	<!-- <context:component-scan base-package="spring.di.*"/> -->
 	<!-- Exam exam = new NewlecExam(); 인 경우 -->
 	<!-- Namespaces p 를 이용해서 설정 -->
-	<bean id="exam" class="spring.di.entity.NewlecExam" p:kor="10" p:eng="20" p:math="30" p:com="40">
+	<!-- <bean id="exam1" class="spring.di.entity.NewlecExam" p:kor="20" p:eng="20" p:math="20" p:com="20"/>
+	<bean id="exam2" class="spring.di.entity.NewlecExam" p:kor="10" p:eng="10" p:math="10" p:com="10"/> -->
+	
 		<!-- property 형식으로 값을 주입 해줄때 -->
 		<!--<property name="kor" value="20"/>
 		<property name="eng" value="20"/>
@@ -20,20 +23,20 @@
 		<constructor-arg name="eng" value="30"></constructor-arg>
 		<constructor-arg name="math" value="40"></constructor-arg>
 		<constructor-arg name="com" value="50"></constructor-arg> -->
-	</bean>
+
 	
 	<!-- ExamConsole console = new GridExamConsole(); 인 경우 -->
-	<bean id="console" class="spring.di.ui.GridExamConsole">
+	<!-- <bean id="console" class="spring.di.ui.GridExamConsole"/> -->
 		<!-- console.setExam(exam); 인 경우 -->
-		<property name="exam" ref="exam"/>
-	</bean>
+		<!-- <property name="exam" ref="exam"/> -->
+
 	
 	<!-- ArrayList 생성 -->
-	<util:list id="exams" list-class="java.util.ArrayList">
+	<!--<util:list id="exams" list-class="java.util.ArrayList">
 		<bean class="spring.di.entity.NewlecExam" p:kor="10" p:eng="20" p:math="30" p:com="40"/>
 		<bean class="spring.di.entity.NewlecExam" p:kor="40" p:eng="30" p:math="20" p:com="10"/>
 		<ref bean="exam"/>
-	</util:list>
+	</util:list> -->
 	
 <!-- 	<bean id="exams" class="java.util.ArrayList">
 		<constructor-arg>

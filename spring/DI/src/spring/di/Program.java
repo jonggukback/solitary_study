@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import spring.di.entity.Exam;
@@ -18,21 +19,20 @@ public class Program {
 		Program main = new Program();
 		//main.Injection();
 		//main.SpringXmlInjection();
-		main.BeanArrayList();
+		//main.BeanArrayList();
+		main.SpringAnnotationInjection();
 	}
 	
-	// 컬렉션을 빈으로 생성해보기
-	public void BeanArrayList() {
+	// 스프링이 주입 (어노테이션) 방법
+	public void SpringAnnotationInjection() {
+		
 		ApplicationContext context = 
-				new ClassPathXmlApplicationContext("spring/di/setting.xml");
+				new AnnotationConfigApplicationContext(DIConfig.class);
 		
-		//List<Exam> exams = new ArrayList<>();
-		List<Exam> exams = (List<Exam>) context.getBean("exams");
-		
-		for(Exam e : exams) {
-			System.out.println(e);
-		}
+		ExamConsole console = (ExamConsole) context.getBean("console");
+		console.print();
 	}
+	
 	
 	// 스프링이 주입 (.xml) 방법
 	public void SpringXmlInjection() {
@@ -46,6 +46,19 @@ public class Program {
 		//ExamConsole console = (ExamConsole) context.getBean("console");
 		ExamConsole console = context.getBean(ExamConsole.class);
 		console.print();
+	}
+	
+	// 컬렉션을 빈으로 생성해보기
+	public void BeanArrayList() {
+		ApplicationContext context = 
+				new ClassPathXmlApplicationContext("spring/di/setting.xml");
+		
+		//List<Exam> exams = new ArrayList<>();
+		List<Exam> exams = (List<Exam>) context.getBean("exams");
+		
+		for(Exam e : exams) {
+			System.out.println(e);
+		}
 	}
 	
 	// 직접 주입
